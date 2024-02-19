@@ -30,4 +30,28 @@ jobs:
           context: ./api/db/postgresql/
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kuma-posggres:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kuma-postgres:latest
+
+      - name: Build & Push Redis
+        uses: docker/build-push-action@v5
+        with:
+          context: ./api/db/redis/
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kuma-redis:latest
+
+      - name: Build & Push kuma-demo-be
+        uses: docker/build-push-action@v5
+        with:
+          context: ./api/
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kuma-demo-be:latest
+
+      - name: Build & Push kuma-demo-fe
+        uses: docker/build-push-action@v5
+        with:
+          context: ./api/
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kuma-demo-fe:latest
